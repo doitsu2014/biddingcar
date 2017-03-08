@@ -2,9 +2,9 @@
 @import url("http://fonts.googleapis.com/css?family=Raleway:100,200,300,500,600,700,800,900");
 
 /*
-	Phase Shift by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+    Phase Shift by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 */
 
 
@@ -136,7 +136,7 @@ header.major .byline {
     font-weight: 300;
 }
 
-footer> :last-child {
+footer>:last-child {
     margin-bottom: 0;
 }
 
@@ -378,7 +378,7 @@ ul.style li {
     border-top: solid 1px rgba(255, 255, 255, 0.2);
 }
 
-ul.style> :first-child {
+ul.style>:first-child {
     border-top: none;
 }
 
@@ -611,21 +611,18 @@ input[type="button"].medium,
 
 /* Main */
 
-.sliderFullScr {
-    margin-left: -105px;
-    margin-right: -103px;
-   
+.sliderFullScr {}
+
+.carousel-inner div {
+    color: #e1719d;
 }
 
-.carousel-inner div  {
-    color: #e1719d;
-    }
-.carousel-caption{
-    width: 600px;
-    margin-left: 350px;
-    margin-bottom: 200px;
+.carousel-caption {
+    width: 800px;
+    margin-left: 450px;
+    margin-bottom: 150px;
 }
-    
+
 .headerContainer {
     color: #292929;
     text-align: center;
@@ -645,9 +642,7 @@ input[type="button"].medium,
     position: absolute;
     padding-top: 240px;
     font-size: 30px;
-    
 }
-
 
 .biddingProduct span {
     color: #e1719d;
@@ -745,6 +740,3 @@ input[type="button"].medium,
     text-align: center;
     border-radius: 0px 0px 6px 6px;
 }
-
-
-
