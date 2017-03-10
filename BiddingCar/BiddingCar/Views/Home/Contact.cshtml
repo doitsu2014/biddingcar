@@ -1,17 +1,43 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div id="main" class="wrapper style2 mainContactUs">
+    <div class="container">
+        <section>
+            <header class="major">
+                <h2>Contact Us</h2>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+            </header>
+            <form method="post" action="#">
+                <div class="row half">
+                    <div class="12u">
+                        <input class="text" type="text" name="name" id="name" placeholder="Name" />
+                    </div>
+                </div>
+                <div class="row half">
+                    <div class="12u">
+                        <input class="text" type="text" name="email" id="email" placeholder="Email" />
+                    </div>
+                </div>
+                <div class="row half">
+                    <div class="12u">
+                        <textarea name="message" id="message" placeholder="Message"></textarea>
+                    </div>
+                </div>
+                <div class="row half">
+                    <div class="12u">
+                        <ul class="actions ">
+                            <li>
+                                <input type="submit" value="Send Message" class="button alt" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+

@@ -1,0 +1,60 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.dropotron.min.js"></script>
+    <script src="~/Scripts/skel.min.js"></script>
+    <script src="~/Scripts/skel-layers.min.js"></script>
+    <script src="~/Scripts/init.js"></script>
+
+    <link rel="stylesheet" href="~/Content/skel.css" />
+    <link rel="stylesheet" href="~/Content/style.css" />
+    <link rel="stylesheet" href="~/Content/style-wide.css" />
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/myCSS.css">
+</head>
+
+<body  style="background-color: black;">
+    <!-- Wrapper -->
+    <div class="wrapper style1">
+        <!-- Header -->
+        <div id="header" class="skel-panels-fixed">
+            <div id="logo">
+                <h1>
+                    <a href="@Url.Action("Index", "Home")"><img src="~/Content/images/logo.png" style="height: 55px;" alt=""></a>
+                </h1>
+            </div>
+            <nav id="nav">
+                <ul>
+                    <li class="active"><a href="@Url.Action("Index", "Home")">Home Page</a></li>
+                    <li><a href="@Url.Action("Instructions", "Home")">Instructions</a></li>
+                    <li><a href="TradingGuide.html">Trading Guide</a></li>
+                    <li><a href="@Url.Action("Contact","Home")">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        @RenderBody()
+
+    </div>
+
+    <!-- Copyright -->
+    <div id="copyright">
+        <div class="container">
+            <span class="copyright" style="font-weight:bold; font-size:15px">Designer: <a href="#">Hoa-san</a> </span>
+            <ul class="icons">
+                <li><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
+                <li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
+                <li><a href="#" class="fa fa-google-plus"><span>Google+</span></a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
