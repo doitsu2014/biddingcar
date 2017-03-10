@@ -38,7 +38,7 @@ function initializeClock(curClock, endtime) {
 
 $(function () {
     $('.biddingProduct').each(function (number, element) {
-        var deadline = new Date(Date.parse(new Date("2017-03-10")));
+        var deadline = new Date(Date.parse(new Date("2017-03-20")));
         var curClock = element;
         initializeClock(curClock, deadline);
     });
