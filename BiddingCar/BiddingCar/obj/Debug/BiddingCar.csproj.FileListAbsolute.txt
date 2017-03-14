@@ -51,3 +51,7 @@ F:\DoitsuWorkspace\Workspace\C#\Bidding car\BiddingCar\BiddingCar\bin\Antlr3.Run
 F:\DoitsuWorkspace\Workspace\C#\Bidding car\BiddingCar\BiddingCar\bin\Newtonsoft.Json.xml
 F:\DoitsuWorkspace\Workspace\C#\Bidding car\BiddingCar\BiddingCar\obj\Debug\BiddingCar.dll
 F:\DoitsuWorkspace\Workspace\C#\Bidding car\BiddingCar\BiddingCar\obj\Debug\BiddingCar.pdb
+F:\DoitsuWorkspace\Workspace\C#\Bidding car\BiddingCar\BiddingCar\bin\EntityFramework.dll
+F:\DoitsuWorkspace\Workspace\C#\Bidding car\BiddingCar\BiddingCar\bin\EntityFramework.SqlServer.dll
+F:\DoitsuWorkspace\Workspace\C#\Bidding car\BiddingCar\BiddingCar\bin\EntityFramework.xml
+F:\DoitsuWorkspace\Workspace\C#\Bidding car\BiddingCar\BiddingCar\bin\EntityFramework.SqlServer.xml

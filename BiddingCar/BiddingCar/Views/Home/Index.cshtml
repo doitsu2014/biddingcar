@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<BiddingCar.Models.Product>
+@{
     ViewBag.Title = "Home Page";
 }
 <div class="container-fluid customPadding">
@@ -9,30 +10,35 @@
             <li data-target="#myCarousel" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner locationSlider">
-            <div class="item active">
-                <img src="~/Content/images/Custom_Datsun_510%20(3).jpg" alt="Thiết kế 1">
-                <div class="carousel-caption">
-                    <h1>Custom Datsun 510</h1>
-                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-                    <a href="Product.html" class="button">Read More</a>
-                </div>
-            </div>
-            <div class="item">
-                <img src="~/Content/images/2%20(2).png" alt="Thiết kế 2">
-                <div class="carousel-caption">
-                    <h1>Bone Speeder</h1>
-                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-                    <a href="#" class="button">Read More</a>
-                </div>
-            </div>
-            <div class="item">
-                <img src="~/Content/images/2%20(3).png" alt="Thiết kế 3">
-                <div class="carousel-caption">
-                    <h1>Formula Flashback</h1>
-                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-                    <a href="#" class="button">Read More</a>
-                </div>
-            </div>
+            @{int index = 0; }
+            @foreach (var item in Model.OrderByDescending(prod => prod.TimeBegin).Take(3))
+            {
+                if (index == 0)
+                {
+                    <div class="item active">
+                        <img src="@Html.DisplayFor(imageUrl => item.ImageURL)" alt="Thiết kế 1">
+                        @*<img src="" alt="Thiết kế 1">*@
+                        <div class="carousel-caption">
+                            <h1>@Html.DisplayFor(name => item.Name)</h1>
+                            <p>@Html.DisplayFor(content => item.BaseDescription)</p>
+                            <a href="Product.html" class="button">Read More</a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="item">
+                        <img src="@Html.DisplayFor(imageUrl => item.ImageURL)" alt="Thiết kế 1">
+                        @*<img src="" alt="Thiết kế 1">*@
+                        <div class="carousel-caption">
+                            <h1>@Html.DisplayFor(name => item.Name)</h1>
+                            <p>@Html.DisplayFor(content => item.BaseDescription)</p>
+                            <a href="Product.html" class="button">Read More</a>
+                        </div>
+                    </div>
+                }
+                index++;
+            }
         </div>
         <a class="left carousel-control" href="http://hocwebgiare.com/#myCarousel" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
         <a class="right carousel-control" href="http://hocwebgiare.com/#myCarousel" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a>
@@ -46,183 +52,76 @@
         <h1 class="headerContainer">Bidding</h1>
         <div class="row no-collapse-1">
 
-            <section class="4u">
-                <p class="fa fa-gavel iconBid">0</p>
-                <a href="#" class="image featured">
-                    <img src="~/Content/images/1%20(1).png" alt="">
-                </a>
-                <div class="box">
-                    <p>2008 Lancer Evolution</p>
-                    <hr />
-                    <p>Remaining Time</p>
-                    <div id="clockdiv" class="biddingProduct">
-                        <div class="hide">
-                            <span class="days"></span>
-                            <div class="smalltext">Days</div>
-                        </div>
-                        <div>
-                            <span class="hours"></span>
-                            <div class="smalltext">Hours</div>
-                        </div>
-                        <div>
-                            <span class="minutes"></span>
-                            <div class="smalltext">Minutes</div>
-                        </div>
-                        <div>
-                            <span class="seconds"></span>
-                            <div class="smalltext">Seconds</div>
-                        </div>
-                    </div>
-                    <a href="#" class="button">Bid Now</a>
-                </div>
-            </section>
-            <section class="4u">
-                <p class="fa fa-gavel iconBid">0</p>
-                <a href="#" class="image featured">
-                    <img src="~/Content/images/1%20(2).png" alt="">
-                </a>
-                <div class="box">
-                    <p>Bone Speeder</p>
-                    <hr />
-                    <p>Remaining Time</p>
-                    <div id="clockdiv" class="biddingProduct">
-                        <div class="hide">
-                            <span class="days"></span>
-                            <div class="smalltext">Days</div>
-                        </div>
-                        <div>
-                            <span class="hours"></span>
-                            <div class="smalltext">Hours</div>
-                        </div>
-                        <div>
-                            <span class="minutes"></span>
-                            <div class="smalltext">Minutes</div>
-                        </div>
-                        <div>
-                            <span class="seconds"></span>
-                            <div class="smalltext">Seconds</div>
-                        </div>
-                    </div>
-                    <a href="#" class="button">Bid Now</a>
-                </div>
-            </section>
-            <section class="4u">
-                <p class="fa fa-gavel iconBid">0</p>
-                <a href="#" class="image featured">
-                    <img src="~/Content/images/1%20(3).png" alt="">
-                </a>
-                <div class="box">
-                    <p>Formula Flashback</p>
-                    <hr />
-                    <p>Remaining Time</p>
-                    <div id="clockdiv" class="biddingProduct">
-                        <div class="hide">
-                            <span class="days"></span>
-                            <div class="smalltext">Days</div>
-                        </div>
-                        <div>
-                            <span class="hours"></span>
-                            <div class="smalltext">Hours</div>
-                        </div>
-                        <div>
-                            <span class="minutes"></span>
-                            <div class="smalltext">Minutes</div>
-                        </div>
-                        <div>
-                            <span class="seconds"></span>
-                            <div class="smalltext">Seconds</div>
-                        </div>
+            @foreach (var item in Model.Where(prop => prop.TimeBegin < DateTime.Today && prop.TimeEnd >= DateTime.Today).Take(3).ToList())
+            {
+                <section class="4u">
+                    <p class="fa fa-gavel iconBid">0</p>
+                    <a href="#" class="image featured">
+                        <img src="@item.ImageURL" alt="">
+                    </a>
+                    <div class="box">
+                        <p>@item.Name</p>
+                        <hr />
+                        <p>Remaining Time</p>
+                        <div id="clockdiv" class="biddingProduct">
+                            <input type="hidden" name="productCountDownValue" value="@item.TimeEnd" id="@item.IdProduct" />
+                            <div>
+                                <span class="days"></span>
+                                <div class="smalltext">Days</div>
+                            </div>
+                            <div>
+                                <span class="hours"></span>
+                                <div class="smalltext">Hours</div>
+                            </div>
+                            <div>
+                                <span class="minutes"></span>
+                                <div class="smalltext">Minutes</div>
+                            </div>
+                            <div>
+                                <span class="seconds"></span>
+                                <div class="smalltext">Seconds</div>
+                            </div>
 
+                        </div>
+                        <a href="#" class="button">Bid Now</a>
                     </div>
-                    <a href="#" class="button">Bid Now</a>
-                </div>
-            </section>
+                </section>
+            }
         </div>
         <!-- Coming -->
         <h1 class="headerContainer">Coming Soon</h1>
         <div class="row no-collapse-1">
-            <section class="4u">
-                <a href="#" class="image featured"><img src="~/Content/images/1%20(4).png" alt=""></a>
-                <div class="box">
-                    <p>Futurismo</p>
-                    <hr />
-                    <p>Waiting Time</p>
-                    <div id="clockdiv" class="biddingProduct">
-                        <div class="hide">
-                            <span class="days"></span>
-                            <div class="smalltext">Days</div>
+            @foreach (var item in Model.Where(prop => prop.TimeBegin > DateTime.Today).Take(3).ToList())
+            {
+                <section class="4u">
+                    <a href="#" class="image featured"><img src="@item.ImageURL" alt=""></a>
+                    <div class="box">
+                        <p>@item.Name</p>
+                        <hr />
+                        <p>Waiting Time</p>
+                        <div id="clockdiv" class="biddingProduct">
+                            <input type="hidden" name="productCountDownValue" value="@item.TimeBegin" id="@item.IdProduct" />
+                            <div>
+                                <span class="days"></span>
+                                <div class="smalltext">Days</div>
+                            </div>
+                            <div>
+                                <span class="hours"></span>
+                                <div class="smalltext">Hours</div>
+                            </div>
+                            <div>
+                                <span class="minutes"></span>
+                                <div class="smalltext">Minutes</div>
+                            </div>
+                            <div>
+                                <span class="seconds"></span>
+                                <div class="smalltext">Seconds</div>
+                            </div>
                         </div>
-                        <div>
-                            <span class="hours"></span>
-                            <div class="smalltext">Hours</div>
-                        </div>
-                        <div>
-                            <span class="minutes"></span>
-                            <div class="smalltext">Minutes</div>
-                        </div>
-                        <div>
-                            <span class="seconds"></span>
-                            <div class="smalltext">Seconds</div>
-                        </div>
+                        <a href="#" class="button">Read More</a>
                     </div>
-                    <a href="#" class="button">Read More</a>
-                </div>
-            </section>
-            <section class="4u">
-                <a href="#" class="image featured"><img src="~/Content/images/1%20(5).png" alt=""></a>
-                <div class="box">
-                    <p>Night Shifter</p>
-                    <hr />
-                    <p>Waiting Time</p>
-                    <div id="clockdiv" class="biddingProduct">
-                        <div class="hide">
-                            <span class="days"></span>
-                            <div class="smalltext">Days</div>
-                        </div>
-                        <div>
-                            <span class="hours"></span>
-                            <div class="smalltext">Hours</div>
-                        </div>
-                        <div>
-                            <span class="minutes"></span>
-                            <div class="smalltext">Minutes</div>
-                        </div>
-                        <div>
-                            <span class="seconds"></span>
-                            <div class="smalltext">Seconds</div>
-                        </div>
-
-                    </div>
-                    <a href="#" class="button">Read More</a>
-                </div>
-            </section>
-            <section class="4u">
-                <a href="#" class="image featured"><img src="~/Content/images/1%20(6).png" alt=""></a>
-                <div class="box">
-                    <p>Corvette C7.R</p>
-                    <hr />
-                    <p>Waiting Time</p>
-                    <div id="clockdiv" class="biddingProduct">
-                        <div class="hide">
-                            <span class="days"></span>
-                            <div class="smalltext">Days</div>
-                        </div>
-                        <div>
-                            <span class="hours"></span>
-                            <div class="smalltext">Hours</div>
-                        </div>
-                        <div>
-                            <span class="minutes"></span>
-                            <div class="smalltext">Minutes</div>
-                        </div>
-                        <div>
-                            <span class="seconds"></span>
-                            <div class="smalltext">Seconds</div>
-                        </div>
-                    </div>
-                    <a href="#" class="button">Read More</a>
-                </div>
-            </section>
+                </section>
+            }
         </div>
         <script type="text/javascript" src="~/Scripts/countdownclock.js">
 
@@ -231,27 +130,16 @@
         <!-- Done -->
         <h1 class="headerContainer">Done</h1>
         <div class="row no-collapse-1">
-            <section class="4u">
-                <p class="fa fa-gavel iconBid">0</p>
-                <a href="#" class="image featured"><img src="~/Content/images/1%20(7).png" alt=""></a>
-                <div class="box">
-                    <p>SRT Viper GTS-R</p>
-                </div>
-            </section>
-            <section class="4u">
-                <p class="fa fa-gavel iconBid">0</p>
-                <a href="#" class="image featured"><img src="~/Content/images/1%20(8).png" alt=""></a>
-                <div class="box">
-                    <p>Custom '12 Ford Mustang</p>
-                </div>
-            </section>
-            <section class="4u">
-                <p class="fa fa-gavel iconBid">0</p>
-                <a href="#" class="image featured"><img src="~/Content/images/1%20(9).png" alt=""></a>
-                <div class="box">
-                    <p>Bull Whip</p>
-                </div>
-            </section>
+            @foreach (var item in Model.Where(prop => prop.TimeEnd < DateTime.Today).Take(3).ToList())
+            {
+                <section class="4u">
+                    <p class="fa fa-gavel iconBid">@item.BidyCount</p>
+                    <a href="#" class="image featured"><img src="@item.ImageURL" alt=""></a>
+                    <div class="box">
+                        <p>@item.Name</p>
+                    </div>
+                </section>
+            }
         </div>
     </div>
 </div>

@@ -13,7 +13,7 @@ function getTimeRemaining(endtime) {
     };
 }
 
-function initializeClock(curClock, endtime) {
+function initializeClock(curClock, endtime, proId) {
     var clock = curClock;
     var daysSpan = clock.querySelector('.days');
     var hoursSpan = clock.querySelector('.hours');
@@ -38,7 +38,7 @@ function initializeClock(curClock, endtime) {
 
 $(function () {
     $('.biddingProduct').each(function (number, element) {
-        var deadline = new Date(Date.parse(new Date("2017-03-20")));
+        var deadline = new Date(Date.parse($(element).children('input[type=hidden]').val()));
         var curClock = element;
         initializeClock(curClock, deadline);
     });

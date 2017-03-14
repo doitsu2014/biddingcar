@@ -1,0 +1,482 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AssignmentDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AboutUs">
+          <Key>
+            <PropertyRef Name="AboutID" />
+          </Key>
+          <Property Name="AboutID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateInsert" Type="date" Nullable="false" />
+          <Property Name="Hotline" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+          </Key>
+          <Property Name="IdAccount" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescriptionUser" Type="nvarchar" MaxLength="500" />
+          <Property Name="FacebookURL" Type="nvarchar" MaxLength="500" />
+          <Property Name="Address" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Bidy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAccount" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdProduct" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="BidTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="DateSend" />
+          </Key>
+          <Property Name="DateSend" Type="datetime" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fullname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContentMessage" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InRole">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="IdAccount" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TypeID" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="IdProduct" />
+          </Key>
+          <Property Name="IdProduct" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="MinPrice" Type="float" Nullable="false" />
+          <Property Name="BaseDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TimeBegin" Type="datetime" Nullable="false" />
+          <Property Name="TimeEnd" Type="datetime" Nullable="false" />
+          <Property Name="MinPriceStep" Type="float" Nullable="false" />
+          <Property Name="ImageURL" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="FirstPrice" Type="float" />
+          <Property Name="CategoryID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TopPrice" Type="float" />
+          <Property Name="BidyCount" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TradingGuide">
+          <Key>
+            <PropertyRef Name="DescriptionBid" />
+            <PropertyRef Name="Hotline" />
+          </Key>
+          <Property Name="DescriptionBid" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Hotline" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeRole">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Bidy_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Bidy" Type="Self.Bidy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="Bidy">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bidy_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Bidy" Type="Self.Bidy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IdProduct" />
+            </Principal>
+            <Dependent Role="Bidy">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InRole_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="InRole" Type="Self.InRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="InRole">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InRole_TypeRole">
+          <End Role="TypeRole" Type="Self.TypeRole" Multiplicity="1" />
+          <End Role="InRole" Type="Self.InRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeRole">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="InRole">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AssignmentDBModelStoreContainer">
+          <EntitySet Name="AboutUs" EntityType="Self.AboutUs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bidy" EntityType="Self.Bidy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InRole" EntityType="Self.InRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeRole" EntityType="Self.TypeRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TradingGuide" EntityType="Self.TradingGuide" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TradingGuide].[DescriptionBid] AS [DescriptionBid], 
+    [TradingGuide].[Hotline] AS [Hotline]
+    FROM [dbo].[TradingGuide] AS [TradingGuide]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Bidy_Account" Association="Self.FK_Bidy_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Bidy" EntitySet="Bidy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bidy_Product" Association="Self.FK_Bidy_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Bidy" EntitySet="Bidy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InRole_Account" Association="Self.FK_InRole_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="InRole" EntitySet="InRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InRole_TypeRole" Association="Self.FK_InRole_TypeRole">
+            <End Role="TypeRole" EntitySet="TypeRole" />
+            <End Role="InRole" EntitySet="InRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AssignmentDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AssignmentDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AboutUs" EntityType="AssignmentDBModel.AboutU" />
+          <EntitySet Name="Accounts" EntityType="AssignmentDBModel.Account" />
+          <EntitySet Name="Bidies" EntityType="AssignmentDBModel.Bidy" />
+          <EntitySet Name="Categories" EntityType="AssignmentDBModel.Category" />
+          <EntitySet Name="Contacts" EntityType="AssignmentDBModel.Contact" />
+          <EntitySet Name="Products" EntityType="AssignmentDBModel.Product" />
+          <EntitySet Name="TypeRoles" EntityType="AssignmentDBModel.TypeRole" />
+          <EntitySet Name="TradingGuides" EntityType="AssignmentDBModel.TradingGuide" />
+          <AssociationSet Name="FK_Bidy_Account" Association="AssignmentDBModel.FK_Bidy_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Bidy" EntitySet="Bidies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bidy_Product" Association="AssignmentDBModel.FK_Bidy_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Bidy" EntitySet="Bidies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Category" Association="AssignmentDBModel.FK_Product_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="InRole" Association="AssignmentDBModel.InRole">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="TypeRole" EntitySet="TypeRoles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AboutU">
+          <Key>
+            <PropertyRef Name="AboutID" />
+          </Key>
+          <Property Name="AboutID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateInsert" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Hotline" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+          </Key>
+          <Property Name="IdAccount" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionUser" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookURL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bidies" Relationship="AssignmentDBModel.FK_Bidy_Account" FromRole="Account" ToRole="Bidy" />
+          <NavigationProperty Name="TypeRoles" Relationship="AssignmentDBModel.InRole" FromRole="Account" ToRole="TypeRole" />
+        </EntityType>
+        <EntityType Name="Bidy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAccount" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IdProduct" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="BidTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Account" Relationship="AssignmentDBModel.FK_Bidy_Account" FromRole="Bidy" ToRole="Account" />
+          <NavigationProperty Name="Product" Relationship="AssignmentDBModel.FK_Bidy_Product" FromRole="Bidy" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="AssignmentDBModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="DateSend" />
+          </Key>
+          <Property Name="DateSend" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContentMessage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="IdProduct" />
+          </Key>
+          <Property Name="IdProduct" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="MinPrice" Type="Double" Nullable="false" />
+          <Property Name="BaseDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeBegin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TimeEnd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MinPriceStep" Type="Double" Nullable="false" />
+          <Property Name="ImageURL" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="FirstPrice" Type="Double" />
+          <Property Name="CategoryID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TopPrice" Type="Double" />
+          <Property Name="BidyCount" Type="Int32" />
+          <NavigationProperty Name="Bidies" Relationship="AssignmentDBModel.FK_Bidy_Product" FromRole="Product" ToRole="Bidy" />
+          <NavigationProperty Name="Category" Relationship="AssignmentDBModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="TypeRole">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="AssignmentDBModel.InRole" FromRole="TypeRole" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="TradingGuide">
+          <Key>
+            <PropertyRef Name="DescriptionBid" />
+            <PropertyRef Name="Hotline" />
+          </Key>
+          <Property Name="DescriptionBid" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Hotline" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Bidy_Account">
+          <End Type="AssignmentDBModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="AssignmentDBModel.Bidy" Role="Bidy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="Bidy">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bidy_Product">
+          <End Type="AssignmentDBModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="AssignmentDBModel.Bidy" Role="Bidy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IdProduct" />
+            </Principal>
+            <Dependent Role="Bidy">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Category">
+          <End Type="AssignmentDBModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="AssignmentDBModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InRole">
+          <End Type="AssignmentDBModel.Account" Role="Account" Multiplicity="*" />
+          <End Type="AssignmentDBModel.TypeRole" Role="TypeRole" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AssignmentDBModelStoreContainer" CdmEntityContainer="AssignmentDBEntities">
+          <EntitySetMapping Name="AboutUs">
+            <EntityTypeMapping TypeName="AssignmentDBModel.AboutU">
+              <MappingFragment StoreEntitySet="AboutUs">
+                <ScalarProperty Name="Hotline" ColumnName="Hotline" />
+                <ScalarProperty Name="DateInsert" ColumnName="DateInsert" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="AboutID" ColumnName="AboutID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="AssignmentDBModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="FacebookURL" ColumnName="FacebookURL" />
+                <ScalarProperty Name="DescriptionUser" ColumnName="DescriptionUser" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bidies">
+            <EntityTypeMapping TypeName="AssignmentDBModel.Bidy">
+              <MappingFragment StoreEntitySet="Bidy">
+                <ScalarProperty Name="BidTime" ColumnName="BidTime" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="AssignmentDBModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="AssignmentDBModel.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="ContentMessage" ColumnName="ContentMessage" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateSend" ColumnName="DateSend" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="AssignmentDBModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="BidyCount" ColumnName="BidyCount" />
+                <ScalarProperty Name="TopPrice" ColumnName="TopPrice" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="FirstPrice" ColumnName="FirstPrice" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="MinPriceStep" ColumnName="MinPriceStep" />
+                <ScalarProperty Name="TimeEnd" ColumnName="TimeEnd" />
+                <ScalarProperty Name="TimeBegin" ColumnName="TimeBegin" />
+                <ScalarProperty Name="BaseDescription" ColumnName="BaseDescription" />
+                <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeRoles">
+            <EntityTypeMapping TypeName="AssignmentDBModel.TypeRole">
+              <MappingFragment StoreEntitySet="TypeRole">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TradingGuides">
+            <EntityTypeMapping TypeName="AssignmentDBModel.TradingGuide">
+              <MappingFragment StoreEntitySet="TradingGuide">
+                <ScalarProperty Name="Hotline" ColumnName="Hotline" />
+                <ScalarProperty Name="DescriptionBid" ColumnName="DescriptionBid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="InRole" TypeName="AssignmentDBModel.InRole" StoreEntitySet="InRole">
+            <EndProperty Name="TypeRole">
+              <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+            </EndProperty>
+            <EndProperty Name="Account">
+              <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

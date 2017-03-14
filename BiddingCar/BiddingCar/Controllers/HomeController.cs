@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BiddingCar.Models;
+using BiddingCar.Services;
 
 namespace BiddingCar.Controllers
 {
@@ -10,7 +12,9 @@ namespace BiddingCar.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            ProductService service = new ProductService();
+            var productList = service.GetAllProduct();
+            return View(productList);
         }
 
         public ActionResult TradingGuide()
