@@ -12,6 +12,7 @@
 
 body {
     background: #0f1116;
+    
 }
 
 body,
@@ -616,18 +617,19 @@ input[type="button"].medium,
 .sliderFullScr {
     margin-left: -105px;
     margin-right: -103px;
-   height: 510px;
+    height: 510px;
 }
 
-.carousel-inner div  {
+.carousel-inner div {
     color: #e1719d;
-    }
-.carousel-caption{
+}
+
+.carousel-caption {
     width: 600px;
     margin-left: 350px;
     margin-bottom: 200px;
 }
-    
+
 .headerContainer {
     color: #292929;
     text-align: center;
@@ -647,9 +649,7 @@ input[type="button"].medium,
     position: absolute;
     padding-top: 240px;
     font-size: 30px;
-    
 }
-
 
 .biddingProduct span {
     color: #e1719d;
@@ -749,4 +749,4 @@ input[type="button"].medium,
 }
 
 
-
+/* Login Form*/

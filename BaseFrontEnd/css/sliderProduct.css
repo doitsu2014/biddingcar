@@ -80,5 +80,9 @@ On click the images will be displayed at normal size to complete the effect
     transform: scale(1);
 }
 
+.customSliderProduct{
+   margin-top: 0px;
+}
+
 
 /*Clicking on any thumbnail now should activate the image related to it*/
