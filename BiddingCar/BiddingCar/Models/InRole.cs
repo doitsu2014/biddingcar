@@ -12,15 +12,11 @@ namespace BiddingCar.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Bidy
+    public partial class InRole
     {
-        public int Id { get; set; }
-        public string Username { get; set; }
-        public string IdProduct { get; set; }
-        public double Price { get; set; }
-        public System.DateTime BidTime { get; set; }
+        public string IdAccount { get; set; }
+        public string TypeID { get; set; }
     
-        public virtual Account Account { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual TypeRole TypeRole { get; set; }
     }
 }

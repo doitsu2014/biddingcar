@@ -7,3 +7,4 @@ F:\DoitsuWorkspace\Workspace\C#\Bidding car\BiddingCar\TestSQLEntityFramework\bi
 F:\DoitsuWorkspace\Workspace\C#\Bidding car\BiddingCar\TestSQLEntityFramework\bin\Debug\EntityFramework.SqlServer.xml
 F:\DoitsuWorkspace\Workspace\C#\Bidding car\BiddingCar\TestSQLEntityFramework\obj\Debug\TestSQLEntityFramework.exe
 F:\DoitsuWorkspace\Workspace\C#\Bidding car\BiddingCar\TestSQLEntityFramework\obj\Debug\TestSQLEntityFramework.pdb
+F:\DoitsuWorkspace\Workspace\C#\Bidding car\BiddingCar\TestSQLEntityFramework\obj\Debug\TestSQLEntityFramework.csprojResolveAssemblyReference.cache

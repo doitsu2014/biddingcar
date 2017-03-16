@@ -13,12 +13,12 @@
   </EntityType>
   <EntityType Name="Account">
     <Key>
-      <PropertyRef Name="IdAccount" />
+      <PropertyRef Name="Username" />
     </Key>
-    <Property Name="IdAccount" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="DescriptionUser" Type="nvarchar" MaxLength="500" />
     <Property Name="FacebookURL" Type="nvarchar" MaxLength="500" />
     <Property Name="Address" Type="nvarchar" MaxLength="150" />
@@ -28,7 +28,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdAccount" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="IdProduct" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
     <Property Name="BidTime" Type="datetime" Nullable="false" />
@@ -75,6 +75,16 @@
     <Property Name="TopPrice" Type="float" />
     <Property Name="BidyCount" Type="int" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="TradingGuide">
@@ -97,10 +107,10 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
     <End Role="Bidy" Type="Self.Bidy" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Account">
-        <PropertyRef Name="IdAccount" />
+        <PropertyRef Name="Username" />
       </Principal>
       <Dependent Role="Bidy">
-        <PropertyRef Name="IdAccount" />
+        <PropertyRef Name="Username" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -113,18 +123,6 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
       </Principal>
       <Dependent Role="Bidy">
         <PropertyRef Name="IdProduct" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_InRole_Account">
-    <End Role="Account" Type="Self.Account" Multiplicity="1" />
-    <End Role="InRole" Type="Self.InRole" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Account">
-        <PropertyRef Name="IdAccount" />
-      </Principal>
-      <Dependent Role="InRole">
-        <PropertyRef Name="IdAccount" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -160,6 +158,7 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
     <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InRole" EntityType="Self.InRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TypeRole" EntityType="Self.TypeRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TradingGuide" EntityType="Self.TradingGuide" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -174,10 +173,6 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
     <AssociationSet Name="FK_Bidy_Product" Association="Self.FK_Bidy_Product">
       <End Role="Product" EntitySet="Product" />
       <End Role="Bidy" EntitySet="Bidy" />
-    </AssociationSet>
-    <AssociationSet Name="FK_InRole_Account" Association="Self.FK_InRole_Account">
-      <End Role="Account" EntitySet="Account" />
-      <End Role="InRole" EntitySet="InRole" />
     </AssociationSet>
     <AssociationSet Name="FK_InRole_TypeRole" Association="Self.FK_InRole_TypeRole">
       <End Role="TypeRole" EntitySet="TypeRole" />

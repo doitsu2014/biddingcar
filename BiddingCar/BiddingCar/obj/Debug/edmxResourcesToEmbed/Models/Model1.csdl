@@ -6,7 +6,9 @@
     <EntitySet Name="Bidies" EntityType="AssignmentDBModel.Bidy" />
     <EntitySet Name="Categories" EntityType="AssignmentDBModel.Category" />
     <EntitySet Name="Contacts" EntityType="AssignmentDBModel.Contact" />
+    <EntitySet Name="InRoles" EntityType="AssignmentDBModel.InRole" />
     <EntitySet Name="Products" EntityType="AssignmentDBModel.Product" />
+    <EntitySet Name="sysdiagrams" EntityType="AssignmentDBModel.sysdiagram" />
     <EntitySet Name="TypeRoles" EntityType="AssignmentDBModel.TypeRole" />
     <EntitySet Name="TradingGuides" EntityType="AssignmentDBModel.TradingGuide" />
     <AssociationSet Name="FK_Bidy_Account" Association="AssignmentDBModel.FK_Bidy_Account">
@@ -21,9 +23,9 @@
       <End Role="Category" EntitySet="Categories" />
       <End Role="Product" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="InRole" Association="AssignmentDBModel.InRole">
-      <End Role="Account" EntitySet="Accounts" />
+    <AssociationSet Name="FK_InRole_TypeRole" Association="AssignmentDBModel.FK_InRole_TypeRole">
       <End Role="TypeRole" EntitySet="TypeRoles" />
+      <End Role="InRole" EntitySet="InRoles" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="AboutU">
@@ -39,24 +41,23 @@
   </EntityType>
   <EntityType Name="Account">
     <Key>
-      <PropertyRef Name="IdAccount" />
+      <PropertyRef Name="Username" />
     </Key>
-    <Property Name="IdAccount" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="Username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Password" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="DescriptionUser" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="FacebookURL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Bidies" Relationship="AssignmentDBModel.FK_Bidy_Account" FromRole="Account" ToRole="Bidy" />
-    <NavigationProperty Name="TypeRoles" Relationship="AssignmentDBModel.InRole" FromRole="Account" ToRole="TypeRole" />
   </EntityType>
   <EntityType Name="Bidy">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IdAccount" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="IdProduct" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="Price" Type="Double" Nullable="false" />
     <Property Name="BidTime" Type="DateTime" Nullable="false" Precision="3" />
@@ -80,6 +81,15 @@
     <Property Name="Fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ContentMessage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="InRole">
+    <Key>
+      <PropertyRef Name="IdAccount" />
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="IdAccount" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="TypeID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TypeRole" Relationship="AssignmentDBModel.FK_InRole_TypeRole" FromRole="InRole" ToRole="TypeRole" />
+  </EntityType>
   <EntityType Name="Product">
     <Key>
       <PropertyRef Name="IdProduct" />
@@ -100,13 +110,23 @@
     <NavigationProperty Name="Bidies" Relationship="AssignmentDBModel.FK_Bidy_Product" FromRole="Product" ToRole="Bidy" />
     <NavigationProperty Name="Category" Relationship="AssignmentDBModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
   </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <EntityType Name="TypeRole">
     <Key>
       <PropertyRef Name="TypeID" />
     </Key>
     <Property Name="TypeID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Accounts" Relationship="AssignmentDBModel.InRole" FromRole="TypeRole" ToRole="Account" />
+    <NavigationProperty Name="InRoles" Relationship="AssignmentDBModel.FK_InRole_TypeRole" FromRole="TypeRole" ToRole="InRole" />
   </EntityType>
   <EntityType Name="TradingGuide">
     <Key>
@@ -121,10 +141,10 @@
     <End Type="AssignmentDBModel.Bidy" Role="Bidy" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Account">
-        <PropertyRef Name="IdAccount" />
+        <PropertyRef Name="Username" />
       </Principal>
       <Dependent Role="Bidy">
-        <PropertyRef Name="IdAccount" />
+        <PropertyRef Name="Username" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -152,8 +172,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="InRole">
-    <End Type="AssignmentDBModel.Account" Role="Account" Multiplicity="*" />
-    <End Type="AssignmentDBModel.TypeRole" Role="TypeRole" Multiplicity="*" />
+  <Association Name="FK_InRole_TypeRole">
+    <End Type="AssignmentDBModel.TypeRole" Role="TypeRole" Multiplicity="1" />
+    <End Type="AssignmentDBModel.InRole" Role="InRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeRole">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="InRole">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>

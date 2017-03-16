@@ -1,0 +1,16 @@
+﻿@using BiddingCar.Models;
+@{
+   var user = Session["USER"] as Account;
+}
+@{
+    if (user != null)
+    {
+        <li><a href="@Url.Action("SeeDetails","Accounts")">@user.Name</a></li>
+        <li><a href="@Url.Action("Logout","Accounts")">Logout</a></li>
+    }
+    else
+    {
+        <li><a href="@Url.Action("Login","Accounts")">Login</a></li>
+        <li><a href="@Url.Action("Register","Accounts")">Register</a></li>
+    }
+}

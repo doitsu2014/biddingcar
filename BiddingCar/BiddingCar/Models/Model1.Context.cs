@@ -30,6 +30,7 @@ namespace BiddingCar.Models
         public virtual DbSet<Bidy> Bidies { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }
+        public virtual DbSet<InRole> InRoles { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<TypeRole> TypeRoles { get; set; }
         public virtual DbSet<TradingGuide> TradingGuides { get; set; }

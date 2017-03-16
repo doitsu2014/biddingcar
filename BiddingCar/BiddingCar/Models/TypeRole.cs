@@ -17,13 +17,13 @@ namespace BiddingCar.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TypeRole()
         {
-            this.Accounts = new HashSet<Account>();
+            this.InRoles = new HashSet<InRole>();
         }
     
         public string TypeID { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<InRole> InRoles { get; set; }
     }
 }

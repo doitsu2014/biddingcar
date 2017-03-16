@@ -19,10 +19,10 @@
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="FacebookURL" ColumnName="FacebookURL" />
           <ScalarProperty Name="DescriptionUser" ColumnName="DescriptionUser" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -32,7 +32,7 @@
           <ScalarProperty Name="BidTime" ColumnName="BidTime" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
-          <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -55,6 +55,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="InRoles">
+      <EntityTypeMapping TypeName="AssignmentDBModel.InRole">
+        <MappingFragment StoreEntitySet="InRole">
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="AssignmentDBModel.Product">
         <MappingFragment StoreEntitySet="Product">
@@ -74,6 +82,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="AssignmentDBModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="TypeRoles">
       <EntityTypeMapping TypeName="AssignmentDBModel.TypeRole">
         <MappingFragment StoreEntitySet="TypeRole">
@@ -90,13 +109,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="InRole" TypeName="AssignmentDBModel.InRole" StoreEntitySet="InRole">
-      <EndProperty Name="TypeRole">
-        <ScalarProperty Name="TypeID" ColumnName="TypeID" />
-      </EndProperty>
-      <EndProperty Name="Account">
-        <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>
