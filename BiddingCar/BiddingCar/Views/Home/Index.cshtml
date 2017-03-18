@@ -10,18 +10,17 @@
             <li data-target="#myCarousel" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner locationSlider">
-            @{int index = 0; }
-            @foreach (var item in Model.OrderByDescending(prod => prod.TimeBegin).Take(3))
+            @{int index = 0;}
+            @foreach (var item in Model.OrderBy(prod => prod.TimeBegin).Take(3))
             {
                 if (index == 0)
                 {
                     <div class="item active">
                         <img src="@Html.DisplayFor(imageUrl => item.ImageURL)" alt="Thiết kế 1">
-                        @*<img src="" alt="Thiết kế 1">*@
                         <div class="carousel-caption">
                             <h1>@Html.DisplayFor(name => item.Name)</h1>
                             <p>@Html.DisplayFor(content => item.BaseDescription)</p>
-                            <a href="Product.html" class="button">Read More</a>
+                            <a href="@Url.Action("SeeDetail","Product", new { idProduct = @item.IdProduct })" class="button">Read More</a>
                         </div>
                     </div>
                 }
@@ -29,19 +28,18 @@
                 {
                     <div class="item">
                         <img src="@Html.DisplayFor(imageUrl => item.ImageURL)" alt="Thiết kế 1">
-                        @*<img src="" alt="Thiết kế 1">*@
                         <div class="carousel-caption">
                             <h1>@Html.DisplayFor(name => item.Name)</h1>
                             <p>@Html.DisplayFor(content => item.BaseDescription)</p>
-                            <a href="Product.html" class="button">Read More</a>
+                            <a href="@Url.Action("SeeDetail","Product", new { idProduct = @item.IdProduct })" class="button">Read More</a>
                         </div>
                     </div>
                 }
                 index++;
             }
         </div>
-        <a class="left carousel-control" href="#" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
-        <a class="right carousel-control" href="#" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a>
     </div>
 </div>
 
@@ -52,11 +50,11 @@
         <h1 class="headerContainer">Bidding</h1>
         <div class="row no-collapse-1">
 
-            @foreach (var item in Model.Where(prop => prop.TimeBegin < DateTime.Today && prop.TimeEnd >= DateTime.Today).Take(3).ToList())
+            @foreach (var item in Model.Where(prop => prop.TimeBegin <= DateTime.Today && prop.TimeEnd >= DateTime.Now).OrderBy(prop => prop.TimeEnd).Take(3).ToList())
             {
                 <section class="4u">
-                    <p class="fa fa-gavel iconBid">0</p>
-                    <a href="#" class="image featured">
+                    <p class="fa fa-gavel iconBid">@item.BidyCount</p>
+                    <a href="@Url.Action("SeeDetail","Product", new { idProduct = @item.IdProduct })" class="image featured">
                         <img src="@item.ImageURL" alt="">
                     </a>
                     <div class="box">
@@ -83,7 +81,7 @@
                             </div>
 
                         </div>
-                        <a href="#" class="button">Bid Now</a>
+                        <a href="@Url.Action("SeeDetail","Product", new { idProduct = @item.IdProduct })" class="button">Bid Now</a>
                     </div>
                 </section>
             }
@@ -91,7 +89,7 @@
         <!-- Coming -->
         <h1 class="headerContainer">Coming Soon</h1>
         <div class="row no-collapse-1">
-            @foreach (var item in Model.Where(prop => prop.TimeBegin > DateTime.Today).Take(3).ToList())
+            @foreach (var item in Model.Where(prop => prop.TimeBegin > DateTime.Now).OrderBy(prop => prop.TimeBegin).Take(3).ToList())
             {
                 <section class="4u">
                     <a href="#" class="image featured"><img src="@item.ImageURL" alt=""></a>
@@ -130,13 +128,14 @@
         <!-- Done -->
         <h1 class="headerContainer">Done</h1>
         <div class="row no-collapse-1">
-            @foreach (var item in Model.Where(prop => prop.TimeEnd < DateTime.Today).Take(3).ToList())
+            @foreach (var item in Model.Where(prop => prop.TimeEnd < DateTime.Now).OrderByDescending(prop => prop.TimeEnd).Take(3).ToList())
             {
                 <section class="4u">
                     <p class="fa fa-gavel iconBid">@item.BidyCount</p>
-                    <a href="#" class="image featured"><img src="@item.ImageURL" alt=""></a>
+                    <a href="@Url.Action("SeeDetail","Product", new { idProduct = @item.IdProduct })" class="image featured"><img src="@item.ImageURL" alt=""></a>
                     <div class="box">
                         <p>@item.Name</p>
+                        <p></p>
                     </div>
                 </section>
             }

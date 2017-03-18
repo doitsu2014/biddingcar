@@ -14,6 +14,7 @@ namespace BiddingCar.Models
     
     public partial class Contact
     {
+        public int Id { get; set; }
         public System.DateTime DateSend { get; set; }
         public string Email { get; set; }
         public string Fullname { get; set; }

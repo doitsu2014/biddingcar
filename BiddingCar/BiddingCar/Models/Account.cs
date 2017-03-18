@@ -27,6 +27,7 @@ namespace BiddingCar.Models
         public string DescriptionUser { get; set; }
         public string FacebookURL { get; set; }
         public string Address { get; set; }
+        public string Phone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bidy> Bidies { get; set; }

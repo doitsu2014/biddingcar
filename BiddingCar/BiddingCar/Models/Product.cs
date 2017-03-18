@@ -32,6 +32,7 @@ namespace BiddingCar.Models
         public string CategoryID { get; set; }
         public Nullable<double> TopPrice { get; set; }
         public Nullable<int> BidyCount { get; set; }
+        public bool Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bidy> Bidies { get; set; }

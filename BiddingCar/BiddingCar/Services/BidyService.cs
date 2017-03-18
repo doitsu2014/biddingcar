@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using BiddingCar.Models;
 using BiddingCar.Repositories;
 
 namespace BiddingCar.Services
@@ -12,7 +13,13 @@ namespace BiddingCar.Services
 
         public int GetCountBidyByProId(string code)
         {
+
             return repo.CountBidOfProduct(code);
+        }
+
+        public void AddBiddy(Bidy bidy)
+        {
+            repo.Add(bidy);
         }
 
     }

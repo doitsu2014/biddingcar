@@ -7,20 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestSQLEntityFramework
+namespace BiddingCar.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Bidy
+    public partial class sysdiagram
     {
-        public int Id { get; set; }
-        public string Username { get; set; }
-        public string IdProduct { get; set; }
-        public double Price { get; set; }
-        public System.DateTime BidTime { get; set; }
-    
-        public virtual Account Account { get; set; }
-        public virtual Product Product { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

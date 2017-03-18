@@ -12,18 +12,11 @@ namespace TestSQLEntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class TypeRole
+    public partial class InRole
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TypeRole()
-        {
-            this.InRoles = new HashSet<InRole>();
-        }
-    
+        public string IdAccount { get; set; }
         public string TypeID { get; set; }
-        public string Name { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InRole> InRoles { get; set; }
+        public virtual TypeRole TypeRole { get; set; }
     }
 }

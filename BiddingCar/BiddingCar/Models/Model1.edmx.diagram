@@ -5,19 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7d2692ad43d642349902080043219f19" Name="Diagram1" ZoomLevel="62">
-        <EntityTypeShape EntityType="AssignmentDBModel.AboutU" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AssignmentDBModel.Account" Width="1.5" PointX="3" PointY="5.625" />
-        <EntityTypeShape EntityType="AssignmentDBModel.Bidy" Width="1.5" PointX="5.25" PointY="1.625" />
+        <EntityTypeShape EntityType="AssignmentDBModel.AboutU" Width="1.5" PointX="5.75" PointY="5.75" />
+        <EntityTypeShape EntityType="AssignmentDBModel.Account" Width="1.5" PointX="3" PointY="6.625" />
+        <EntityTypeShape EntityType="AssignmentDBModel.Bidy" Width="1.5" PointX="5.25" PointY="1.75" />
         <EntityTypeShape EntityType="AssignmentDBModel.Category" Width="1.5" PointX="0.75" PointY="2.125" />
-        <EntityTypeShape EntityType="AssignmentDBModel.Contact" Width="1.5" PointX="5.75" PointY="8.75" />
-        <EntityTypeShape EntityType="AssignmentDBModel.InRole" Width="1.5" PointX="8" PointY="5.875" />
+        <EntityTypeShape EntityType="AssignmentDBModel.Contact" Width="1.5" PointX="7.75" PointY="0.75" />
         <EntityTypeShape EntityType="AssignmentDBModel.Product" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="AssignmentDBModel.TypeRole" Width="1.5" PointX="5.75" PointY="5.875" />
-        <EntityTypeShape EntityType="AssignmentDBModel.TradingGuide" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AssignmentDBModel.sysdiagram" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AssignmentDBModel.TradingGuide" Width="1.5" PointX="7.75" PointY="6.75" />
         <AssociationConnector Association="AssignmentDBModel.FK_Bidy_Account" />
         <AssociationConnector Association="AssignmentDBModel.FK_Bidy_Product" />
         <AssociationConnector Association="AssignmentDBModel.FK_Product_Category" />
-        <AssociationConnector Association="AssignmentDBModel.FK_InRole_TypeRole" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

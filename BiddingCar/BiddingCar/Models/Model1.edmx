@@ -27,6 +27,7 @@
           <Property Name="DescriptionUser" Type="nvarchar(max)" />
           <Property Name="FacebookURL" Type="nvarchar(max)" />
           <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Bidy">
           <Key>
@@ -47,20 +48,13 @@
         </EntityType>
         <EntityType Name="Contact">
           <Key>
-            <PropertyRef Name="DateSend" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DateSend" Type="datetime" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Fullname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ContentMessage" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="InRole">
-          <Key>
-            <PropertyRef Name="IdAccount" />
-            <PropertyRef Name="TypeID" />
-          </Key>
-          <Property Name="IdAccount" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="TypeID" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -78,6 +72,17 @@
           <Property Name="CategoryID" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="TopPrice" Type="float" />
           <Property Name="BidyCount" Type="int" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -88,13 +93,6 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
           </Key>
           <Property Name="DescriptionBid" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Hotline" Type="nvarchar" MaxLength="20" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TypeRole">
-          <Key>
-            <PropertyRef Name="TypeID" />
-          </Key>
-          <Property Name="TypeID" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Bidy_Account">
           <End Role="Account" Type="Self.Account" Multiplicity="1" />
@@ -120,18 +118,6 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_InRole_TypeRole">
-          <End Role="TypeRole" Type="Self.TypeRole" Multiplicity="1" />
-          <End Role="InRole" Type="Self.InRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TypeRole">
-              <PropertyRef Name="TypeID" />
-            </Principal>
-            <Dependent Role="InRole">
-              <PropertyRef Name="TypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Product_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -150,9 +136,8 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
           <EntitySet Name="Bidy" EntityType="Self.Bidy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="InRole" EntityType="Self.InRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TypeRole" EntityType="Self.TypeRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TradingGuide" EntityType="Self.TradingGuide" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [TradingGuide].[DescriptionBid] AS [DescriptionBid], 
@@ -166,10 +151,6 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
           <AssociationSet Name="FK_Bidy_Product" Association="Self.FK_Bidy_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Bidy" EntitySet="Bidy" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InRole_TypeRole" Association="Self.FK_InRole_TypeRole">
-            <End Role="TypeRole" EntitySet="TypeRole" />
-            <End Role="InRole" EntitySet="InRole" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
             <End Role="Category" EntitySet="Category" />
@@ -186,9 +167,8 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
           <EntitySet Name="Bidies" EntityType="AssignmentDBModel.Bidy" />
           <EntitySet Name="Categories" EntityType="AssignmentDBModel.Category" />
           <EntitySet Name="Contacts" EntityType="AssignmentDBModel.Contact" />
-          <EntitySet Name="InRoles" EntityType="AssignmentDBModel.InRole" />
           <EntitySet Name="Products" EntityType="AssignmentDBModel.Product" />
-          <EntitySet Name="TypeRoles" EntityType="AssignmentDBModel.TypeRole" />
+          <EntitySet Name="sysdiagrams" EntityType="AssignmentDBModel.sysdiagram" />
           <EntitySet Name="TradingGuides" EntityType="AssignmentDBModel.TradingGuide" />
           <AssociationSet Name="FK_Bidy_Account" Association="AssignmentDBModel.FK_Bidy_Account">
             <End Role="Account" EntitySet="Accounts" />
@@ -201,10 +181,6 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
           <AssociationSet Name="FK_Product_Category" Association="AssignmentDBModel.FK_Product_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InRole_TypeRole" Association="AssignmentDBModel.FK_InRole_TypeRole">
-            <End Role="TypeRole" EntitySet="TypeRoles" />
-            <End Role="InRole" EntitySet="InRoles" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AboutU">
@@ -229,6 +205,7 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
           <Property Name="DescriptionUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FacebookURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Bidies" Relationship="AssignmentDBModel.FK_Bidy_Account" FromRole="Account" ToRole="Bidy" />
         </EntityType>
         <EntityType Name="Bidy">
@@ -253,21 +230,13 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
         </EntityType>
         <EntityType Name="Contact">
           <Key>
-            <PropertyRef Name="DateSend" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DateSend" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ContentMessage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="InRole">
-          <Key>
-            <PropertyRef Name="IdAccount" />
-            <PropertyRef Name="TypeID" />
-          </Key>
-          <Property Name="IdAccount" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="TypeID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TypeRole" Relationship="AssignmentDBModel.FK_InRole_TypeRole" FromRole="InRole" ToRole="TypeRole" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -285,16 +254,19 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
           <Property Name="CategoryID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="TopPrice" Type="Double" />
           <Property Name="BidyCount" Type="Int32" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Bidies" Relationship="AssignmentDBModel.FK_Bidy_Product" FromRole="Product" ToRole="Bidy" />
           <NavigationProperty Name="Category" Relationship="AssignmentDBModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
         </EntityType>
-        <EntityType Name="TypeRole">
+        <EntityType Name="sysdiagram">
           <Key>
-            <PropertyRef Name="TypeID" />
+            <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="TypeID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="InRoles" Relationship="AssignmentDBModel.FK_InRole_TypeRole" FromRole="TypeRole" ToRole="InRole" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TradingGuide">
           <Key>
@@ -340,18 +312,6 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_InRole_TypeRole">
-          <End Type="AssignmentDBModel.TypeRole" Role="TypeRole" Multiplicity="1" />
-          <End Type="AssignmentDBModel.InRole" Role="InRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TypeRole">
-              <PropertyRef Name="TypeID" />
-            </Principal>
-            <Dependent Role="InRole">
-              <PropertyRef Name="TypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -373,6 +333,7 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="AssignmentDBModel.Account">
               <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="FacebookURL" ColumnName="FacebookURL" />
                 <ScalarProperty Name="DescriptionUser" ColumnName="DescriptionUser" />
@@ -409,20 +370,14 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
                 <ScalarProperty Name="Fullname" ColumnName="Fullname" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="DateSend" ColumnName="DateSend" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InRoles">
-            <EntityTypeMapping TypeName="AssignmentDBModel.InRole">
-              <MappingFragment StoreEntitySet="InRole">
-                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
-                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="AssignmentDBModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="BidyCount" ColumnName="BidyCount" />
                 <ScalarProperty Name="TopPrice" ColumnName="TopPrice" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
@@ -438,11 +393,14 @@ warning 6002: The table/view 'AssignmentDB.dbo.TradingGuide' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TypeRoles">
-            <EntityTypeMapping TypeName="AssignmentDBModel.TypeRole">
-              <MappingFragment StoreEntitySet="TypeRole">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AssignmentDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

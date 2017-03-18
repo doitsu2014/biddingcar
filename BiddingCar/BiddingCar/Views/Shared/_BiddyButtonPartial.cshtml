@@ -1,0 +1,63 @@
+﻿@using BiddingCar.Models;
+@{
+    var user = Session["USER"] as Account;
+    string timeEnd = this.ViewData.ContainsKey("TimeEnd") ? this.ViewData["TimeEnd"].ToString() : null;
+}
+@{
+    if (user != null)
+    {
+        if(timeEnd != null) {
+            if(DateTime.Parse(timeEnd) > DateTime.Now)
+            {
+                <button class="btn btn-success" style="background-color: hotpink" type="submit">
+                    BID
+                </button>
+            }
+            else
+            {
+                <button class="btn btn-success" style="background-color: hotpink" type="button">
+                    DONE
+                </button>
+            }
+
+        }
+
+
+
+        <script>
+            $("#biddingCarForm").submit(function (event) {
+                var minPriceToBid = $("#txtMinPriceToBid").val();
+                var bidPrice = $("#txtBidPrice").val();
+                var bool = true;
+                if (!bidPrice.match(/^[+-]?([0-9]*[.])?[0-9]+$/)) {
+                    bool == false;
+                }
+                if (bool == true) {
+                    if (minPriceToBid > bidPrice) {
+                        $("#bidDanger").removeClass('hide');
+                        event.preventDefault(event);
+                        return false;
+                    } else {
+                        $("#bidDanger").addClass('hide');
+                    }
+                } else {
+                    $("#bidDanger").removeClass('hide');
+                    event.preventDefault(event);
+                    return false;
+                }
+            });
+        </script>
+    }
+    else
+    {
+        <button class="btn btn-success" style="background-color: hotpink" type="button"
+                onclick="clickToLogin()">
+            <span class="glyphicon glyphicon-alert" style="margin-right:10px" aria-hidden="true"></span>LOGIN TO BID<span class="glyphicon glyphicon-alert" style="margin-left:10px" aria-hidden="true"></span>
+        </button>
+        <script>
+            var clickToLogin = function () {
+                location.href = "@Url.Action("Login", "Accounts")"; return false;
+            }
+        </script>
+    }
+}

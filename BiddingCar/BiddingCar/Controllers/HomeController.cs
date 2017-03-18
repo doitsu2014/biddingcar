@@ -16,23 +16,10 @@ namespace BiddingCar.Controllers
             var productList = service.GetAllProduct();
             return View(productList);
         }
-
-        public ActionResult TradingGuide()
-        {
-            return View();
-        }
-
-        public ActionResult Instructions()
-        {
-
-            return View();
-        }
-
         public ActionResult About()
         {
             return View();
         }
-
         public ActionResult Contact()
         {
             return View();

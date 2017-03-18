@@ -28,7 +28,6 @@ namespace TestSQLEntityFramework
         public System.DateTime TimeEnd { get; set; }
         public double MinPriceStep { get; set; }
         public string ImageURL { get; set; }
-        public int Status { get; set; }
         public Nullable<double> FirstPrice { get; set; }
         public string CategoryID { get; set; }
         public Nullable<double> TopPrice { get; set; }

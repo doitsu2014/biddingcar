@@ -1,0 +1,82 @@
+﻿@model BiddingCar.Models.ProductViewModel
+
+@{
+    ViewBag.Title = "Product Detail";
+}
+
+<link href="~/Content/seeProductDetail.css" rel="stylesheet" />
+
+
+<div class="container" style="background-color:white">
+    <div class="row" style="padding-left: 100px">
+        <div class="col-xs-6 item-photo">
+            <img style="max-width:100%;" src="@Model.ImageURL" />
+        </div>
+        <div class="col-xs-5" style="border:0px solid gray">
+            @using (Html.BeginForm("BidProduct", "Product", FormMethod.Post, new { id = "biddingCarForm" }))
+            {
+            <!-- Datos del vendedor y titulo del producto -->
+                <h3 style="font-weight: bold; font-size: 40px">@Model.Name</h3>
+                    <h6 class="title-attr">Top Bider:</h6>
+                    <h3 style="color:crimson;margin-top:0px">@Model.TopBider</h3>
+            <!-- Precios -->
+
+                    <h6 class="title-price"><small>Current Price:</small></h6>
+                    <h3 style="margin-top:0px;"><span style="font-size:25px"> @Model.TopPrice </span>$</h3>
+                <!-- Detalles especificos del producto -->
+                    <div class="section" style="padding-bottom:20px;">
+                        <h6 class="title-attr"><small>Bid Price:</small></h6>
+                        <div>
+                            <input type="hidden" name="txtIdProduct" value="@Model.IdProduct" />
+                            <input type="hidden" id="txtMinPriceToBid" value="@(Model.TopPrice+Model.MinPriceStep)" />
+                            <input value="@(Model.TopPrice+Model.MinPriceStep)" id="txtBidPrice" style="width:600px;max-width:600px;font-size: 15px;" name="txtBidPrice" /><span style="font-size:25px">$</span>
+                        </div>
+                        <div class="alert alert-danger hide" id="bidDanger">
+                            <strong>Danger!</strong> Your bid prices must be more than @(Model.TopPrice + Model.MinPriceStep)
+                        </div>
+                    </div>
+                <!-- Botones de compra -->
+                    <div class="section" style="padding-bottom:20px;">
+                        @{Html.RenderPartial("_BiddyButtonPartial", new ViewDataDictionary {{ "TimeEnd", Model.TimeEnd.ToString() }} );}
+                    </div>
+                            }
+        </div>
+        <div class="col-xs-9">
+            <div class="box">
+                <p>Remaining Time</p>
+                <div id="clockdiv" class="biddingProduct">
+                    <input type="hidden" name="productCountDownValue" value="@Model.TimeEnd" id="@Model.IdProduct" />
+                    <div>
+                        <span class="days"></span>
+                        <div class="smalltext">Days</div>
+                    </div>
+                    <div>
+                        <span class="hours"></span>
+                        <div class="smalltext">Hours</div>
+                    </div>
+                    <div>
+                        <span class="minutes"></span>
+                        <div class="smalltext">Minutes</div>
+                    </div>
+                    <div>
+                        <span class="seconds"></span>
+                        <div class="smalltext">Seconds</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="~/Scripts/countdownclock.js"></script>
+    </div>
+    <div class="col-xs-9">
+        <ul class="menu-items">
+            <li class="active">Base Description</li>
+        </ul>
+        <div style="width:100%;border-top:1px solid silver">
+            <p style="padding:15px;">
+                @Model.BaseDescription
+            </p>
+        </div>
+    </div>
+</div>
+    </div>
