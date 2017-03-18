@@ -30,7 +30,7 @@ namespace BiddingCar.Controllers
         public ActionResult Login(string username, string password)
         {
             AccountService service = new AccountService();
-            Account acc = service.FindByUsernameAndPass(username, password);
+            Account acc = service.FindByUsernameAndPass(username.ToLower(), password);
 
             var userSession = Session["USER"];
             if (userSession == null)
@@ -80,7 +80,7 @@ namespace BiddingCar.Controllers
             }
 
             Account newAccount = new Account();
-            newAccount.Username = username;
+            newAccount.Username = username.ToLower();
             newAccount.Password = password;
             newAccount.Email = email;
             newAccount.Name = fullname;
